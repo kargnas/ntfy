@@ -1,0 +1,17 @@
+# ntfy server config for the Railway deployment at https://ntfy.zz.gg (see AGENTS-fork.md).
+# All state lives on the Railway volume mounted at /var/lib/ntfy, so redeploys keep messages and users.
+
+base-url: "https://ntfy.zz.gg"
+# Railway's public domain for this service targets port 8080.
+listen-http: ":8080"
+cache-file: "/var/lib/ntfy/cache.db"
+auth-file: "/var/lib/ntfy/user.db"
+
+# Private server: anonymous visitors can neither publish nor subscribe.
+auth-default-access: "deny-all"
+enable-login: true
+require-login: true
+
+# Railway's edge proxy appends the client IP to X-Forwarded-For. Without this,
+# every visitor would share a single rate limit bucket.
+behind-proxy: true
